@@ -1,0 +1,230 @@
+﻿{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+  
+    <script src="{% static 'jquery.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'homepage/bootstrap/css/bootstrap.min.css' %}">
+    
+   <title>predico</title>
+   
+   <link rel="stylesheet" href="{% static 'homepage/bootstrap/css/bootstrap.min.css' %}">
+   <link rel="stylesheet" href="{% static 'homepage/css.css' %}">
+    
+
+   
+  <style>
+
+   .img {
+    position: relative;
+    float: left;
+    width:  200px;
+    height: 200px;
+    background-position: 100% 100%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+
+
+  body{
+
+  background-image: url( "{% static 'homepage/gray.jpg' %}");
+  background-attachment: fixed;
+  opacity: 0.93;
+  background-repeat: no-repeat;
+  
+  background-size:cover;
+
+  }
+
+
+</style>
+
+
+
+
+    {% block head %}
+
+
+
+    {% endblock %}
+
+
+  
+  </head>
+
+
+  <body>
+
+
+
+      <div class="container-fluid">
+
+          <div class="page-header mt-1 mb-1 ml-1 ">
+          <h1>PREDICO</h1>   
+          <h6>Be your own doctor </h6>
+        </div>
+      
+      
+          <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1b405a;">
+              <a class="navbar-brand" href="{% url 'home' %}">Predico </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'home' %}">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'home' %}">About</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'home' %}">Contact</a>
+                      </li>
+                      
+      
+      
+                      {% if user.is_authenticated %}
+                      
+                      {% if user.patient %}
+      
+                      <li class="nav-item ml-2">
+                      <li class="nav-link" href="{% url 'patient_ui' %}" style="color: rgb(91, 252, 50);">Hello, {{user.patient.name}}</li>
+                      </li>
+                      <li class="nav-item ml-2">
+                          <a class="nav-link" href="{% url 'patient_ui' %}">Profile</a>
+                          </li>
+      
+                      {% endif %}
+                      
+                      {% if user.doctor  %}
+      
+                      <li class="nav-item ml-2">
+                        <li class="nav-link" href="{% url 'doctor_ui' %}" style="color: rgb(91, 252, 50);">Hello, Dr. {{user.doctor.name}}</li>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <a class="nav-link" href="{% url 'doctor_ui' %}">Profile</a>
+                            </li>
+      
+      
+                      {% endif %}
+      
+                      <li class="nav-item ml-2">
+      <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#logout-modal" style="color: rgb(247, 190, 188);">Log out</button>
+                        
+                      </li>
+      
+      
+      
+      
+                      <!-- Small modal -->
+      
+      <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header"><h4>Logout <i class="fa fa-lock"></i></h4></div>
+            <div class="modal-body"><i class="fa fa-question-circle"></i><span style="color: rgb(42, 187, 6);">{{user.patient.name}}</span>, Are you sure you want to log-off?</div>
+            <div class="modal-footer"><a href="{% url 'logout' %}" class="btn btn-primary btn-block">Logout</a></div>
+          </div>
+        </div>
+      </div>
+                      
+                      {% else %}
+                      
+                      <li class="nav-item ml-2">
+                          <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg2">Signup</a>
+                      </li>
+                      <li class="nav-item ml-">
+                          <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg">Signin</a>
+                      </li>
+                      
+                      {% endif %}
+      
+                  </ul>
+              </div>
+          </nav>
+      
+
+
+
+    
+<!-- Large modal -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+     
+  <center>
+    <h1>Sign-In  As</h1>
+    </center>
+  <br><br>
+  
+  <center>
+  <form>
+      <div class="container mt-5 mb-5">
+   <div class="row">
+      <div class="col">
+         <a href="{% url 'admin:index' %}">
+  <img  alt="admin" src="{% static 'homepage/admin.png' %}"  class="img">
+  </a>
+      </div>
+  
+      <div class="col">
+  <a href="{% url 'sign_in_doctor' %}">
+  <img  alt="doctor" src="{% static 'homepage/doctor.png' %}"  class="img">
+  </a>
+      </div>
+  
+      <div class="col">
+  <a href="{% url 'sign_in_patient' %}">
+  <img  alt="patient" src="{% static 'homepage/patient.png' %}"  class="img">
+  </a>
+      </div>
+    </div>
+    </div>
+  </form>
+  </center>
+  
+      </div>
+    </div>
+  </div>
+
+
+
+  {% block body %}
+
+  {% endblock %}
+
+
+
+
+</div>
+
+
+
+   <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   
+    <script src="https://code.jquery.com/jquery-3.4.1.js"integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ 
+
+
+</body>
+</html>

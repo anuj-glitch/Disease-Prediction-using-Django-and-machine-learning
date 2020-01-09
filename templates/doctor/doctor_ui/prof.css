@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto|Thasadith');
+
+
+
+
+.center{
+    
+    margin-top: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+}
+.bio_card{
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.left{
+    margin: 0;
+    position: relative;
+    width: 400px;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+background: -moz-linear-gradient(90deg, rgba(76,179,233,1) 0%, rgba(74,119,233,1) 100%);
+background: -webkit-linear-gradient(90deg, rgba(76,179,233,1) 0%, rgba(74,119,233,1) 100%);
+background: linear-gradient(90deg, rgba(76,179,233,1) 0%, rgba(74,119,233,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4cb3e9",endColorstr="#4a77e9",GradientType=1);
+    color: #fafafa;
+    
+    position: relative;
+    text-align: center;
+    font-family: 'Thasadith', sans-serif;
+    font-weight: 100;
+}
+.left .box{
+    position: relative;
+    height: 50px;
+}
+.left .cover{
+    width: 100%;
+    height: 200px;
+    border-radius: 25px 0 0 0;
+}
+.left .profile{
+   position: relative;
+    top:100px;
+    width: 150px;
+    height: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100%;
+    border: 4px solid #fafafa;
+}
+
+.left .info{
+    width: 100%;
+    text-align: center;
+      
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 1.3rem;
+}
+
+
+.left .info i{
+    font-size: 2.6rem;
+    margin-bottom: 12px;
+}
+
+.left .btn{
+    z-index: 23;
+      background: rgb(76,179,233);
+background: -moz-linear-gradient(90deg, rgba(76,179,233,1) 0%, rgba(74,119,233,1) 100%);
+background: -webkit-linear-gradient(90deg, rgba(76,179,233,1) 0%, rgba(74,119,233,1) 100%);
+background: linear-gradient(90deg, rgba(76,179,233,1) 0%, rgba(74,119,233,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4cb3e9",endColorstr="#4a77e9",GradientType=1);
+    color: #fafafa;
+    text-align: center;
+    position: relative;
+    right: calc(0% - 23px);
+    top: calc(200px - 23px);
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+    
+}
+.left .btn i{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.right
+{
+    background-color: #fff;
+    width: 0px;
+    overflow: hidden;
+    height: 100%;
+    /**/
+     
+  
+}
+
+
+
+
+.right button{
+    width: 90%;
+    margin-top:5px;
+    text-align: center;
+    padding: 5px 10px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    
+   
+
+    border-radius: 5px;
+    color: green;
+    border: none;
+    
+	
+	color:#fff;
+	font-size: 12px;
+	
+
+}
+
+
+
+
+
+.low button a{
+	text-transform: uppercase;
+	text-decoration: none;
+	color: white;
+	letter-spacing: 1px;
+}
+
+.low button:hover{
+	background-color: rgb(15, 146, 253);
+	border:1px solid white;
+}

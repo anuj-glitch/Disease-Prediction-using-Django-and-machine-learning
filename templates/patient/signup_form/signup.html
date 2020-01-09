@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="{% static 'patient/signup_form/signup.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+</head>
+<body>
+<form action='signup_patient' method="POST" style="max-height:500px; max-width:450px;  margin:auto;">
+ <h1></b><center>SIGN UP AS PATIENT</center></b></h1><br>
+
+  {% csrf_token %}
+  
+  <center>
+      <div>
+        {% for message in messages %}
+        <div class="alert alert-warning" role="alert">
+            <h3 style="color: red;">{{message}}</h3>
+          </div>
+        {% endfor %}
+      </div>
+      </center>
+
+
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Username" name="username">
+  </div>
+
+  
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Name" name="name">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email">
+  </div>
+   <div class="input-container">
+    <i class="fa fa-calendar icon"></i>
+    <input class="input-field" type="date" placeholder="Date-of-birth" name="dob">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-birthday-cake icon"></i>
+    <input class="input-field" type="number" placeholder="Age" name="age">
+  </div>
+  <div class="input-container">
+  
+  <i class="fa fa-genderless icon"></i>
+    <input class="radio-btn" type="radio" name="gender" value="male" checked> Male 
+  <input class="radio-btn" type="radio" name="gender" value="female"> Female
+  <input class="radio-btn" type="radio" name="gender" value="other"> Other 
+ 
+  </div>
+  
+  
+  <div class="input-container">
+    <i class="fa fa-address-book icon"></i>
+    <input class="input-field" type="text" placeholder="Address" name="address">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="number" placeholder="Mobile" name="mobile">
+  </div>
+  
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="password">
+  </div>
+  
+  <div class="input-container">
+    <i class="fa fa-check icon"></i>
+    <input class="input-field" type="password" placeholder="Retype Password" name="password1">
+  </div>
+  
+  
+
+  <br>
+
+  <button type="submit" class="btn btn-primary">Register</button>
+  <br><br>
+</form>
+<br><br><br>
+</body>
+</html>

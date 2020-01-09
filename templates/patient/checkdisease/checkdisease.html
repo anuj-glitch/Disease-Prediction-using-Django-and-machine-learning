@@ -1,0 +1,328 @@
+
+
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">   
+ 
+
+
+<script>
+
+  /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function Functionshow() {
+  
+  document.getElementById("searchbar").value = '';
+  document.getElementById("myDropdown").classList.toggle("show");
+   search_symptoms();
+  
+}
+
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.btn')) {
+    if (!event.target.matches('.searchbardiv')){
+      if (!event.target.matches('.searchbar')){
+
+    var dropdowns = document.getElementsByClassName("drop-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+}
+}
+
+  function Functionsymptoms(name) {
+    var newItem = document.createElement("TEXTAREA");
+    newItem.innerText = name;
+    newItem.setAttribute("id","symptoms");
+    
+    newItem.setAttribute("class","symptoms");
+    document.getElementById("sympbox").appendChild(newItem);
+    
+  }
+
+ 
+  //var elements = document.getElementsByClassName("symptoms");
+
+
+  function search_symptoms() { 
+    let input = document.getElementById('searchbar').value 
+    input=input.toLowerCase(); 
+    let x = document.getElementsByClassName('dropdown-item'); 
+      
+    for (i = 0; i < x.length; i++) {  
+        if (!x[i].innerHTML.toLowerCase().includes(input)) { 
+            x[i].style.display="none"; 
+        } 
+        else { 
+            x[i].style.display="inline-block";                  
+        } 
+    } 
+} 
+
+
+$(document).ready( function(){
+
+
+$("#predict").click(function () {
+  event.preventDefault();
+
+  var symptoms = document.getElementsByClassName("symptoms");
+  var noofsym = symptoms.length;
+  var symlist=[];
+
+  if(noofsym == 0){
+     alert(" please add some symptoms ");
+  }
+
+  else {
+
+  for(i=0;i<symptoms.length;i++){
+    symlist[i]=symptoms[i].value;
+  }
+  
+
+
+  $("#resultdiv").show("slow");
+  $('html,body').animate({
+    scrollTop: $("#resultdiv").offset().top},
+    'slow');
+       
+
+
+
+  $.ajax({
+      url: 'checkdisease',
+      type: "POST",
+      data: { "noofsym" : noofsym,
+              "symptoms" :symlist,
+              csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+      },
+      dataType: 'json',
+
+      success: function (data) {
+        document.getElementById('diseasefield').innerText = data["predicteddisease"];
+        document.getElementById('percentage').innerText = data["confidencescore"]+"%";
+        percent=data["confidencescore"];
+        disease=data["predicteddisease"];
+
+        $('#percentage').css('width', percent + "%");
+
+        document.getElementById('diseasesearch').innerText = data["predicteddisease"];
+
+        $("#href").attr("href","https://www.google.com/search?q="+ disease +"");
+
+        
+        document.getElementById('consultdoctor').innerText = data["consultdoctor"];
+
+      }
+      
+    });
+
+  }
+
+  });
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block body %}
+
+
+
+
+
+<div class="container">
+      <!-- 
+  
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div> -->
+
+
+  <div class="container">
+    <br>
+    <div class="text-center"> 
+      <h3>
+          Identify possible conditions and treatment related to your symptoms.
+      </h3><br>
+            <button onclick="Functionshow()" class="btn btn-primary dropdown-toggle">Add symptoms</button>
+    </div>
+  </div >
+
+  <div id="myDropdown" class="drop-content">
+
+        <div id="searchbardiv" class="searchbardiv">    
+      
+            <input id="searchbar" class="searchbar" onkeyup="search_symptoms()" type="text"
+              name="search" placeholder=" Search symptoms.. "> <br>
+        </div> 
+
+        <div class="container" id="container-dropdown">
+            {% for i in list2 %}
+            
+            <a class="dropdown-item" onclick="Functionsymptoms(this.textContent)">{{i}}</a>
+            
+            {% endfor %}
+        </div>
+  </div>
+        
+      
+    
+
+
+<!-- 
+
+<div class="dropdown">
+  
+    <button onclick="Functionshow()" class="dropbtn">Add symptoms</button>
+      
+  </div >
+    <div id="myDropdown" class="dropdown-content">
+
+     <div id="searchbardiv" class="searchbardiv">    
+      
+    <input id="searchbar" class="searchbar" onkeyup="search_symptoms()" type="text"
+    name="search" placeholder=" Search symptoms.. "> <br>
+  </div> 
+  <div>
+            {% for i in list2 %}
+            
+            <a class="links" onclick="Functionsymptoms(this.textContent)">{{i}}</a>
+            
+            {% endfor %}
+  </div>
+        </div>
+       -->
+    
+<br><br>
+  <div class="text-center">
+        <div class="card" id= "symptoms-box">
+    
+      {% csrf_token %}
+            <div class="card-header">Symptoms list -</div>
+                    <div class="card-body" id="sympbox" >
+                    </div>
+                          <br>
+                          <div class="card-footer">
+                                <button id="predict" class="btn btn-success">Predict</button>
+                          </div>
+             </div>
+        </div>
+  </div>
+
+
+
+  <div id="resultdiv" style="display: none;" >
+        <div class="text-center">
+              <div class="card" id="predicted-data">
+                    <div>
+                            <span class="diseasefield" >Patient name : {{ user.patient.name }}</span>
+                            <span class="diseasefield" >&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Age : {{ user.patient.age }} </span>
+                    </div>
+                    <span class="diseasefield" >predicted disease is : </span><span class="diseasefield" id="diseasefield" style="color: #092700; text-shadow: 2px 2px 4px rgb(36, 255, 45);"></span> <br>
+                    <br>
+                    <span class="diseasefield">confidence score of :  </span>
+                    <span>
+                          <div class="progress" style="display: inline-block;width:140px">
+                              <div id="percentage" class="progress-bar" style="width: 0%">0%
+                              </div>
+                          </div>
+                    </span>
+
+                    </div>
+              </div>
+
+        <div class="text-center mt-4 mb-4"> 
+              <button class="btn btn-outline-success">
+                    <a id="href" href="https://www.google.com/search?q=anuj" target="_blank" rel="noopener noreferrer">Click here to know more about &nbsp 
+                    <span id="diseasesearch" style="color: crimson;"></span></a>
+              </button>
+        </div>
+          <br><br>
+
+        <div class="text-center">
+          <h4>This tool does not provide medical advice. It is intended for informational purposes only.
+          </h4><h4>It is not a substitute for professional medical advice, diagnosis or treatment. 
+          </h4>
+        <br><br>
+
+        </div>
+
+
+<div class="mx-auto text-center " style="width:350px">
+  
+     
+        <div >  <form action="consult_a_doctor" method="GET">
+            {% csrf_token %} 
+            <button id="consultbtn" type="submit" class="btn btn-primary"> Consult a <span id="consultdoctor"  name="consultdoctor" > </span> doctor</button>
+          </form>
+        </div>
+      
+ 
+</div>
+
+         
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

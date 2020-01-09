@@ -1,0 +1,11 @@
+
+.img {
+    position: relative;
+    float: left;
+    width:  200px;
+    height: 200px;
+    background-position: 100% 100%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
+

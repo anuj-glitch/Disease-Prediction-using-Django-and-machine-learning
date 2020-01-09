@@ -1,0 +1,80 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" >
+
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+<br><center><h2> Consultion History </h2>
+</center>
+<div class="container  mt-5 mb-3">
+<br>
+
+
+
+
+            <table class="table table-hover table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Patient name</th>
+                  <th>Email</th>
+                  <th>View profile</th>
+                  <th>Disease Name</th>
+                  <th>Consultation Date</th>
+                  <th>Consultation Status</th>
+                  <th>Resume Consultation</th>
+                </tr>
+              </thead>
+
+              <tbody>
+               
+               {% for i in consultation %}
+               
+               
+                <tr>
+                  <td>{{i.patient.name}}</td>
+                  <td>{{i.patient.user.email}}</td>
+                  <td style="width: 200px;">
+                  
+                    <form action="{% url 'pviewprofile' i.patient.user.username %}" method="GET">
+                      {% csrf_token %} 
+                       <button type="submit" class="btn btn-primary">view profile</button>  
+                    </form>
+
+                  </td>
+
+                  <td>{{i.diseaseinfo.diseasename}}</td>
+                  <td>{{i.consultation_date}}</td>
+                  <td>{{i.status}}</td>
+
+                  <td>
+                    
+                      <form action="{% url 'consultationview' i.id %}" method="GET">
+                          {% csrf_token %} 
+                           <button type="submit" class="btn btn-primary"> Consult</button>  
+                        </form>
+    
+                  </td>
+                </tr>
+
+
+                {% endfor %}
+
+              
+              </tbody>
+            </table>
+        
+
+
+</div>
+  
+{% endblock %}

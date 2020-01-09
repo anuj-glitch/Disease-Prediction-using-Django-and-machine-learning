@@ -1,0 +1,471 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+    #chat_window{
+
+      position: fixed;
+      max-height: 500px;
+      bottom: 4%;
+      top: 22%;
+      right: 10px;
+      max-width: 43%;
+      min-width: 43%;
+  
+
+    }
+
+
+   #chat_body{
+
+    position: relative;
+    
+  }
+
+
+    #chat-form {
+      position: absolute;
+      bottom: 1px;
+      float: bottom;
+      width: 95%;
+  }
+
+  .panel-heading{
+    position: relative;
+    background-color: #35a83b;
+    padding: 5px;
+    margin-bottom: 5px ;
+    color: #fff;
+  }
+
+  .panel-body {
+      overflow-y: scroll;
+      
+      max-height:400px;
+      width: auto;
+      top: 10px;
+      bottom: 20px;
+  }
+  
+body{
+  position: relative;
+  box-shadow: 0px 0px 20px 0px rgb(219, 218, 218) !important;
+  background-color: #5f94c21a !important;
+
+}
+
+.list-group-item {
+  display: block;
+  padding: 1px !important;
+
+}
+
+
+
+.container{max-width:1170px; margin:auto;}
+
+img{ max-width:100%;}
+
+.inbox_people {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 40%; border-right:1px solid #c4c4c4;
+}
+.inbox_msg {
+  border: 1px solid #c4c4c4;
+  clear: both;
+  overflow: hidden;
+}
+
+
+
+
+.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
+.chat_ib h5 span{ font-size:13px; float:right;}
+.chat_ib p{ font-size:14px; color:#989898; margin:auto}
+.chat_img {
+  float: left;
+  width: 11%;
+}
+.chat_ib {
+  float: left;
+  width: 88%;
+}
+
+.chat_people{ overflow:hidden; clear:both;}
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+}
+.inbox_chat { height: 550px; overflow-y: scroll;}
+
+.active_chat{ background:#ebebeb;}
+
+.incoming_msg_img {
+  display: inline-block;
+  width: 6%;
+}
+.received_msg {
+  display: inline-block;
+  vertical-align: top;
+  width: 92%;
+ }
+ .received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  width: 100%;
+}
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+}
+.received_withd_msg { width: 57%;}
+.mesgs {
+  float: left;
+  width: 100%;
+}
+
+ .sent_msg li {
+  background: #1f778f none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0; color:#fff;
+  width:100%;
+  
+}
+
+.sent_msg {
+  float: right;
+  width: 46%;
+}
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+}
+
+.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 33px;
+}
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+
+
+
+
+
+</style>
+
+
+
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+
+<br><center><h2> Consultation</h2>
+</center>
+<br>
+
+
+
+<div class="row">
+
+
+<div class="col" >
+
+
+{% if user.patient.is_patient  %}
+  <div class="container ml-5 mr-5">
+          <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#demo">Give Rating and Reviews to Doctor {{consultation.doctor.name}}</button>
+                  <div id="demo" class="collapse">
+                      
+                    <form action="{% url 'rate_review' consultation.id %}" method="POST"> 
+                       {% csrf_token %}
+                        <div class="form-group mt-2">
+                                <label for="sel1">Rate (Out of 5):</label>
+                                <div class="row">
+                                  <div class="col-sm-2">
+                                      <select class="form-control" id="sel1" name="rating" > 
+                                   
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>4</option>
+                                          <option>5</option>
+                                        </select>
+                                  </div>
+                                  <div class="col-sm-10">
+                                      <i class="material-icons" style="font-size:36px;color:yellow">star_half</i>
+                             
+                                  </div>
+                                </div>
+                               
+                              
+
+                                <br>
+                                <label for="comment">Reviews:</label>
+                                <textarea class="form-control" rows="5" id="comment" name="review"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+                  </div>
+
+  </div>
+    {% endif %}
+  <div class="container mt-4 ml-5 mr-5">
+          <button type="button" class="btn btn-outline-danger mb-4" data-toggle="collapse" data-target="#demo2">Close Consultation</button>
+          <div id="demo2" class="collapse">Are you sure to close consultation ?
+            <br>
+            <button class="btn btn-outline-success mr-2 mt-2">Yes</button>
+            <button class="btn btn-outline-danger mt-2"  data-toggle="collapse" >NO</button>
+           
+          </div>
+      
+  </div>
+
+    
+
+
+
+
+
+
+    <div class="card mt-5 ml-5 mr-5 mb-5">
+                   
+        <div class="card-body">
+          <h4 class="card-title">Predicted disease : {{consultation.diseaseinfo.diseasename}}</h4>
+          <p class="card-text">list of symptoms - 
+
+              <ul class="list-group" >
+                {% for i in consultation.diseaseinfo.symptomsname %}
+                <li class="list-group-item" style="background-color:aliceblue">{{i}}</li>
+                {% endfor %}
+              </ul>
+        
+
+          </p>
+          <p class="card-text">confident score - {{consultation.diseaseinfo.confidence}} %</p>
+          <p class="card-text">Patient age - {{consultation.patient.age}}</p>
+
+          <p class="card-text">Consultation date - {{consultation.consultation_date}}</p>
+          <p class="card-text" style="color: green;">Consultation status - {{consultation.status}}</p>
+        </div>
+    </div>
+
+
+<br><br>
+
+
+
+
+                
+                            <div class="card mt-5 ml-5 mr-5 mb-5" >
+                                <div class="text-center " style="width:100px">
+                                    <img class="card-img-top " src="{% static 'homepage/patient.png' %}" alt="Card image" style="width:100%;">
+                                </div>
+                                <div class="card-body">
+                                  <h4 class="card-title">Patient name : {{consultation.patient.name}}</h4>
+                                  <p class="card-text">Patient ID - {{consultation.patient.user_id}}</p>
+                                  <p class="card-text">Patient email - {{consultation.patient.user.email}}</p>
+                                  <p class="card-text">patient phone no. - {{consultation.patient.mobile_no}}</p>
+                                  <a href="{% url 'pviewprofile' consultation.patient.user.username %}" class="btn btn-primary">View Profile</a>
+                                </div>
+                            </div>
+                
+                       
+                                <div class="card mt-5 ml-5 mr-5 mb-5" >
+                                        <div class="text-center " style="width:100px">
+                                            <img class="card-img-top" src="{% static 'homepage/doctor.png' %}" alt="Card image" style="width:100%;">
+                                        </div>
+                                        <div class="card-body" style="display: inline-block;">
+                                          <h4 class="card-title">Doctor name : {{consultation.doctor.name}}</h4>
+                                          <p class="card-text">Doctor ID - {{consultation.doctor.user_id}}</p>
+                                          <p class="card-text">Doctor email - {{consultation.doctor.user.email}}</p>
+                                          <p class="card-text">Doctor phone no. - {{consultation.doctor.mobile_no}}</p>
+                                          <p class="card-text">Doctor rating is - {{consultation.doctor.rating}}/5</p>
+                                          <a href="{% url 'dviewprofile' consultation.doctor.user.username %}" class="btn btn-primary">View Profile</a>
+                                        </div>
+                                </div>
+                        
+
+                                
+            
+</div>       <!-- col 1 ends here................................................ -->
+                   
+    
+    
+        
+        
+        
+      <div class="col">
+
+        
+           
+            <div class="container-fluid border border-success rounded-lg" id="chat_window" style="background-color: #1423301a !important;">
+                        
+             
+                                <div id="chat-body" class="panel panel-default">
+                                    <center> <div class="panel-heading">Chat Box 
+                                             </div>  </center>
+
+                                    <div id="msg-list-div" class="panel-body">
+                                                <ul id="msg-list" class="list-group">
+
+
+                                          {% include 'consultation/chat_body.html' %}
+
+                      
+
+                                        <script>
+                                                var chatlist = document.getElementById('msg-list-div');
+                                                chatlist.scrollTop = chatlist.scrollHeight;
+                                        </script>
+                                                                                      
+                                                </ul>
+
+                                    </div>
+                                    <br>
+
+
+                                        <div id="chat-form" class="container-fluid">  {% csrf_token %}
+                                            <div id="chat-bottom" class="input-group">
+                                                <input type="text" id="chat-msg" name="chat-msg" class="form-control" placeholder="Type a message" />
+                                                
+                                            <div>
+                                                    <input class="btn btn-primary" id="send" type="submit" value="Send"/>
+                                        </div>
+                                                
+                                               
+                                </div>
+
+
+
+       
+
+                        
+
+             </div>  
+</div>  <!-- col ends here................................................ -->
+
+
+
+  
+</div><!-- row ends here................................................ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+  $('#send').click( function(event){
+    event.preventDefault();
+
+    $.ajax({
+        url :"{% url 'post' %}",
+        type : "POST",
+        data : { msgbox : $('#chat-msg').val(),
+        csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+       },
+
+        success : function(json){
+            console.log(json);
+            $('#chat-msg').val('');
+            $('#msg-list').append('<li class="text-right list-group-item">' + json.msg + '</li>');
+          
+        }
+    });
+
+
+
+});
+
+
+function getMessages(){
+  if (!scrolling) {
+    $.ajax({
+      url: "{% url 'messages' %}",
+      type: "GET",
+     
+      success: function(messages) {
+        $('#msg-list').html(messages);
+        var chatlist = document.getElementById('msg-list-div');
+        chatlist.scrollTop = chatlist.scrollHeight;
+      }
+    });
+  }
+  scrolling = false;
+}
+
+var scrolling = false;
+
+$(function(){
+    $('#msg-list-div').on('scroll', function(){
+        scrolling = true;
+    });
+    refreshTimer = setInterval(getMessages, 2000);
+});
+
+$(document).ready(function() {
+
+  getMessages();
+  
+     $('#send').attr('disabled','disabled');
+     $('#chat-msg').keyup(function() {
+        if($(this).val() != '') {
+            $('#send').removeAttr('disabled');
+        }
+        else {
+            $('#send').attr('disabled','disabled');
+        }
+     });
+ });
+
+</script>
+
+
+
+
+
+{% endblock %}

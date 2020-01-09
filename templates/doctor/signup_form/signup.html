@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="{% static 'doctor/signup_form/signup.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+
+<form action='signup_doctor' method="POST" style="max-width:500px;margin:auto">
+
+  <h1></b><center>SIGN UP AS DOCTOR</center></b></h1>
+  
+  {% csrf_token %}
+  
+  <center>
+      <div>
+        {% for message in messages %}
+        <div class="alert alert-warning" role="alert">
+            <h3 style="color: red;">{{message}}</h3>
+          </div>
+        {% endfor %}
+      </div>
+      </center>
+
+
+
+
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Username" name="username">
+  </div>
+
+
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Name" name="name">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email">
+  </div>
+   <div class="input-container">
+    <i class="fa fa-calendar icon"></i>
+    <input class="input-field" type="date" placeholder="Date-of-birth" name="dob" style="width: 50%;"><pre>     Date Of Birth      </pre>
+  </div>
+  <div class="input-container">
+    <i class="fa fa-birthday-cake icon"></i>
+    <input class="input-field" type="number" placeholder="Age" name="age">
+  </div>
+  
+  <div class="input-container">
+  <i class="fa fa-genderless icon"></i>
+  <input class="radio-btn" type="radio" name="gender" value="male" checked> Male 
+  <input class="radio-btn" type="radio" name="gender" value="female"> Female
+  <input class="radio-btn" type="radio" name="gender" value="other"> Other 
+ 
+  </div>
+  
+  
+  <div class="input-container">
+    <i class="fa fa-address-book icon"></i>
+    <input class="input-field" type="text" placeholder="Address" name="address">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="number" placeholder="Mobile" name="mobile">
+  </div>
+  
+ 
+  
+
+  <div class="input-container">
+  <i class="fa fa-id-card-o icon"></i>
+    <input class="input-field" type="text" placeholder="Registration Number" name="registration_no">
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-calendar icon"></i>
+    <input class="input-field" type="date" placeholder="Year of registration" name="year_of_registration" style="width: 50%;"><pre>    Year Of Registration   </pre>
+  </div>
+
+  <div class="input-container">
+    <i class="fa fa-user-md icon"></i>
+    <input class="input-field" type="text" placeholder="Qualification" name="qualification">
+  </div>
+
+
+  <div class="input-container">
+    <i class="fa fa-users icon"></i>
+    <input class="input-field" type="text" placeholder="State Medical Council" name="State_Medical_Council">
+  </div>
+
+
+  <div class="input-container">
+    <i class="fa fa-address-book icon"></i>
+    <pre>  Specialization                                </pre>
+          <select name="specialization">
+              <option disabled="disabled" selected="selected">Specialization</option>
+              <option>Rheumatologist</option>
+              <option>Cardiologist</option>
+              <option>ENT specialist</option>
+              <option>Orthopedist</option>
+              <option>Neurologist</option>
+              <option>Allergist/Immunologist</option>
+              <option>Urologist</option>
+              <option>Dermatologist</option>
+              <option>Gastroenterologist</option>
+              <option>Other</option>
+          </select>
+          <div class="select-dropdown"></div>
+  </div>
+
+
+
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="password">
+  </div>
+  
+  <div class="input-container">
+    <i class="fa fa-check icon"></i>
+    <input class="input-field" type="password" placeholder="Retype Password" name="password1">
+  </div>
+
+
+
+  <button type="submit" class="btn">Register</button>
+</form>
+
+</body>
+</html>

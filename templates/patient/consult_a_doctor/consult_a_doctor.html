@@ -1,0 +1,80 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+    <link rel="stylesheet" href="{% static 'patient/consult_a_doctor/consult_a_doctor.css' %}">
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" >
+
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+
+<br><center><h2> Consult a Doctor </h2>
+</center>
+<div class="container  mt-5 mb-3">
+<br>
+
+
+
+
+        
+
+            <table class="table table-hover table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Doctor name</th>
+                  <th>Specialization</th>
+                  <th>Email</th>
+                  <th>Ratings</th>
+                  <th>View profile</th>
+                  <th>Consult</th>
+                </tr>
+              </thead>
+
+              <tbody>
+               
+               {% for i in dobj %}
+               
+               
+                <tr>
+                  <td>{{i.name}}</td>
+                  <td>{{i.specialization}}</td>
+                  <td>{{i.user.email}}</td>
+                  <td>{{i.rating}}/5</td>
+                  <td>
+                  
+                    <form action="{% url 'dviewprofile' i.user.username %}" method="GET">
+                      {% csrf_token %} 
+                       <button type="submit" class="btn btn-primary">view profile</button>  
+                    </form>
+
+                  </td>
+                  <td>
+                    
+                      <form action="{% url 'make_consultation' i.user.username %}" method="POST">
+                          {% csrf_token %} 
+                           <button type="submit" class="btn btn-primary"> Consult</button>  
+                        </form>
+    
+                  </td>
+                </tr>
+
+
+                {% endfor %}
+
+              
+              </tbody>
+            </table>
+        
+
+
+</div>
+  
+{% endblock %}

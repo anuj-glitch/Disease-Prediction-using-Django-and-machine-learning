@@ -1,0 +1,158 @@
+
+
+ #predict{
+    position: static;
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+        
+} 
+
+#predicted-data{
+  margin-top: 5% !important;
+  width: 40%;
+  background:rgba(3, 169, 244, 0.48);
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  text-shadow: -5px 5px 6px white;
+  box-shadow: 3px 1px 3px 0px #607D8B;
+  display:inline-block;
+      
+}
+
+
+
+#inputsym{
+   
+   position: fixed;
+   right: 100px;
+}
+
+.symptoms{
+  border:ridge rgb(150, 177, 199);
+  margin: 2px;
+  display: block ;
+  text-align: center;
+  padding: 0px !important;
+  
+  background-color: #fdffff;
+  text-shadow: 0px 1px 20px rgba(3, 169, 244, 0.78);
+  box-shadow: 0px 8px 16px 0px rgba(78, 191, 243, 0.05);
+ 
+}
+
+#symptoms-box{ 
+position: static;
+margin-top: 5%;
+margin-left: 20%;
+margin-right: 20%;
+text-align: center;
+
+background-color: #e9ecef !important;
+min-height: 300px;
+
+padding: 10px 10px 10px 10px;
+    
+}
+
+.card-body{
+  margin-left: auto ;
+  margin-right: auto ;
+  
+  
+}
+/*  ------------------------------------------------------------*/
+/* Dropdown Button */
+ .dropbtn {
+    position: relative;
+    left:50%;
+    width: 150px;
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  } 
+   
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    left:40%;
+    
+  } 
+  #container-dropdown{
+
+    
+    min-width: 1130px;
+    min-height: 200px;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .drop-content {
+    left:10%;
+    right: 10%;
+    display: none;
+    background-color: #fdffff;
+    
+    text-shadow: 0px 1px 20px rgb(7, 97, 231);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    
+  }
+
+  
+.dropdown-item {
+  position: relative;
+  min-width: 100px ;    
+  text-align: center !important;
+  width: auto !important;
+  display:inline-block ;
+  cursor: pointer;         
+
+  clear: both;
+  text-align: center; 
+  border: 0; 
+
+  margin: 10px !important;
+  
+  background-color: #fdffff;
+  text-shadow: 0px 1px 20px rgba(3, 169, 244, 0.78);
+  box-shadow: 0px 8px 16px 0px rgba(3, 169, 244, 0.05);
+
+  line-height: 2;
+  padding: 4px !important;
+  
+}
+  
+  /* Links inside the dropdown 
+  .dropdown-content a {
+ 
+  }*/
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: rgb(90, 199, 241)}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container
+   when the user clicks on the dropdown button) */
+  .show {display:inline-block;}
+
+
+  #searchbar{ 
+    margin-left: 25%; 
+    padding:10px; 
+    border-radius: 10px; 
+   
+    width: 30%; 
+} 
+
+  #searchbardiv{
+    padding:10px; 
+
+  }

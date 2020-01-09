@@ -1,0 +1,116 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+    
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+
+<br>
+<div class="container mt-3 mb-3">
+<center><h2>Doctor Profile</h2>
+</center><br>
+
+
+
+
+    <div class="row">
+        <div class="col" >
+
+            <div class="card" style="width:350px">
+                <img class="card-img-top" src="{% static 'homepage/doctor.png' %}" alt="Card image" style="width:100%;">
+                <div class="card-body">
+                  <h4 class="card-title">Doctor name : {{user.doctor.name}}</h4>
+                  <p class="card-text">Doctor ID - {{user.doctor.user_id}}</p>
+                  <p class="card-text">Doctor email - {{user.email}}</p>
+                  <a href="{% url 'dviewprofile' user.username %}" class="btn btn-primary">View Profile</a>
+                </div>
+              </div>
+
+        </div>
+
+
+        <div class="col" >
+             
+            <div class="row">
+             <a class="btn btn-outline-info btn-block" href="{% url 'dconsultation_history' %}">view consulation history</a><br>
+             </div>
+
+
+                <div class="row">
+                    <button class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#myModal-feedback">Give feedbacks </button><br>
+                    </div>
+                   
+    
+                    <!-- The Modal -->
+      <div class="modal fade" id="myModal-feedback">
+        <div class="modal-dialog modal-xl ">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Feedbacks</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="post_feedback" method="POST">   {% csrf_token %}
+                  <div class="form-group">
+                    <label for="comment">Give feeback:</label>
+                    <textarea class="form-control" rows="5" id="feedback" name="feedback"></textarea>
+                  </div>
+                  
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button id="submit" type="submit" class="btn btn-success" data-dismiss="modal" style="color: white;">Submit</button>
+            </div>
+                </form>
+            
+          </div>
+        </div>
+      </div>
+    
+                   
+    
+            </div>
+        </div>
+    
+    <script>
+    
+    
+      $(document).ready(function() {
+    
+        $('#submit').click( function(event){
+      
+          $.ajax({
+              url :"{% url 'post_feedback' %}",
+              type : "POST",
+              data : { feedback : $('#feedback').val(),
+              csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+             },
+      
+              success : function(data){
+                  alert(data);
+              }
+          });
+      
+      
+      });
+          
+       });
+    
+    </script>
+    
+      
+  
+{% endblock %}
