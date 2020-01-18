@@ -6,7 +6,7 @@ from datetime import date
 from django.contrib import messages
 from django.contrib.auth.models import User , auth
 from .models import patient , doctor , diseaseinfo , consultation ,rating_review
-from chats.models import Chat
+from chats.models import Chat,Feedback
 
 # Create your views here.
 
@@ -33,6 +33,30 @@ def home(request):
    
 
        
+
+
+def admin_ui(request):
+
+    if request.method == 'GET':
+
+      if request.user.is_authenticated:
+
+        auser = request.user
+        Feedbackobj = Feedback.objects.all()
+
+        return render(request,'admin/admin_ui/admin_ui.html' , {"auser":auser,"Feedback":Feedbackobj})
+
+      else :
+        return redirect('home')
+
+
+
+    if request.method == 'POST':
+
+       return render(request,'patient/patient_ui/profile.html')
+
+
+
 
 
 def patient_ui(request):
@@ -176,28 +200,29 @@ def checkdisease(request):
         #   doctor_specialization = ["Rheumatologist","Cardiologist","ENT specialist","Orthopedist","Neurologist",
         #                             "Allergist/Immunologist","Urologist","Dermatologist","Gastroenterologist"]
         
-        Rheumatologist = [ 'Peptic ulcer diseae', 'Osteoarthristis']
-        
-        Cardiologist = [ 'Heart attack','Bronchial Asthma']
-        
-        ENT_specialist = ['Cervical spondylosis','Common Cold','Tuberculosis','(vertigo) Paroymsal  Positional Vertigo' ]
 
-        Orthopedist = ['Arthritis']
+        Rheumatologist = [  'Osteoarthristis','Arthritis']
+       
+        Cardiologist = [ 'Heart attack','Bronchial Asthma','Hypertension ']
+       
+        ENT_specialist = ['(vertigo) Paroymsal  Positional Vertigo','Hypothyroidism' ]
 
-        Neurologist = ['Paralysis (brain hemorrhage)','Hypertension ','Migraine']
+        Orthopedist = []
 
-        Allergist_Immunologist = ['Allergy','Hypothyroidism', 'Hyperthyroidism','Pneumonia', 
-        'Hypoglycemia','AIDS']
+        Neurologist = ['Varicose veins','Paralysis (brain hemorrhage)','Migraine','Cervical spondylosis']
+
+        Allergist_Immunologist = ['Allergy','Pneumonia',
+        'AIDS','Common Cold','Tuberculosis','Malaria','Dengue','Typhoid']
 
         Urologist = [ 'Urinary tract infection',
-         'Psoriasis', 'Impetigo', 'Dimorphic hemmorhoids(piles)']
+         'Dimorphic hemmorhoids(piles)']
 
-        Dermatologist = [  'Varicose veins','Acne','Chicken pox','Fungal infection']
+        Dermatologist = [  'Acne','Chicken pox','Fungal infection','Psoriasis','Impetigo']
 
-        Gastroenterologist = [ 'GERD','Chronic cholestasis','Drug Reaction','Gastroenteritis','Hepatitis E', 
-        'Alcoholic hepatitis', 'Jaundice','Malaria','Dengue','Typhoid','hepatitis A',
-         'Hepatitis B', 'Hepatitis C', 'Hepatitis D','Diabetes ']
-
+        Gastroenterologist = ['Peptic ulcer diseae', 'GERD','Chronic cholestasis','Drug Reaction','Gastroenteritis','Hepatitis E',
+        'Alcoholic hepatitis','Jaundice','hepatitis A',
+         'Hepatitis B', 'Hepatitis C', 'Hepatitis D','Diabetes ','Hypoglycemia']
+         
         if predicted_disease in Rheumatologist :
            consultdoctor = "Rheumatologist"
            
@@ -391,11 +416,43 @@ def  consultationview(request,consultation_id):
 
       return render(request,'consultation/consultation.html', {"consultation":consultation_obj })
 
-
    #  if request.method == 'POST':
-
-       
    #    return render(request,'consultation/consultation.html' )
+
+
+
+
+
+def rate_review(request,consultation_id):
+   if request.method == "POST":
+         
+         consultation_obj = consultation.objects.get(id=consultation_id)
+         patient = consultation_obj.patient
+         doctor1 = consultation_obj.doctor
+         rating = request.POST.get('rating')
+         review = request.POST.get('review')
+
+         rating_obj = rating_review(patient=patient,doctor=doctor1,rating=rating,review=review)
+         rating_obj.save()
+
+         rate = int(rating_obj.rating_is)
+         doctor.objects.filter(pk=doctor1).update(rating=rate)
+         
+
+         return redirect('consultationview',consultation_id)
+
+
+
+
+
+def close_consultation(request,consultation_id):
+   if request.method == "POST":
+         
+         consultation.objects.filter(pk=consultation_id).update(status="closed")
+         
+         return redirect('home')
+
+
 
 
 
@@ -432,25 +489,6 @@ def messages(request):
          return render(request, 'consultation/chat_body.html', {'chat': c})
 
 
-
-
-
-def rate_review(request,consultation_id):
-   if request.method == "POST":
-         
-         consultation_obj = consultation.objects.get(id=consultation_id)
-         patient = consultation_obj.patient
-         doctor1 = consultation_obj.doctor
-         rating = request.POST.get('rating')
-         review = request.POST.get('review')
-
-         rating_obj = rating_review(patient=patient,doctor=doctor1,rating=rating,review=review)
-         rating_obj.save()
-
-         rate = int(rating_obj.rating_is)
-         doctor.objects.filter(pk=doctor1).update(rating=rate)
-         
-
-         return redirect('consultationview',consultation_id)
+#-----------------------------chatting system ---------------------------------------------------
 
 

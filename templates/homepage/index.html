@@ -6,11 +6,6 @@
 	{% block head %}
 
 
-
-
-
-
-  
 {% endblock %}
 
 
@@ -30,7 +25,7 @@
               fed with various details and the disease associated with those details.The application allows
                user to share their disease related issues.It then processes user specific details to check 
                for various illness that could be associated with it.Here we use some intelligent data mining
-                techniques to guess the most accurate illness that couldbe associated with patient’s details.
+                techniques to guess the most accurate illness that could be associated with patient’s details.
                 Based on result, patient can contact doctor accordingly for further treatment.
     
                 
@@ -42,12 +37,47 @@
 
       <p class="lead">
       <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target=".bd-example-modal-lg">Get started</button>
-      
-    </p>
+      </p>
     
-    {% endif %}
 
 </div>
+
+<br><br><br>
+<div class="container mt-5 mb-3" style="width:fit-content;">
+      <center>
+        <h1>Sign-In  As</h1>
+        </center>
+      
+      
+      <form>
+          <div class="container mt-5 mb-5">
+       <div class="row">
+          <div class="col">
+             <a href="{% url 'sign_in_admin' %}">
+      <img  alt="admin" src="{% static 'homepage/admin.png' %}"  class="img">
+      </a>
+          </div>
+      
+          <div class="col">
+      <a href="{% url 'sign_in_doctor' %}">
+      <img  alt="doctor" src="{% static 'homepage/doctor.png' %}"  class="img">
+      </a>
+          </div>
+      
+          <div class="col">
+      <a href="{% url 'sign_in_patient' %}">
+      <img  alt="patient" src="{% static 'homepage/patient.png' %}"  class="img">
+      </a>
+          </div>
+        </div>
+        </div>
+      </form>
+</div>
+
+
+    
+
+    {% endif %}
 
 <br><br>
 
@@ -70,7 +100,7 @@
     <div class="container mt-5 mb-5">
  <div class="row">
     <div class="col">
-       <a href="#">
+       <a href="{% url 'sign_in_admin' %}">
 <img  alt="admin" src="{% static 'homepage/admin.png' %}"  class="img">
 </a>
     </div>
@@ -142,7 +172,7 @@
 
 
 <br><br><br><br>
-
+<center><h2>Our Doctors</h2></center>
 <div class="row mt-5 mb-5">
     <div class="col">
         <div class="card">
@@ -150,7 +180,7 @@
                 <h5 class="card-title">Dr. MANISH BANSAL </h5>
                 <img  alt="admin" src="{% static 'homepage/c31.jpg' %}" width="200" height="150" class="rounded">
                 <p class="card-text">H.No-1283, Ward No-14, New Anaz Mandi Road, P.O-Radaur, Distt. Yamuna Nagar - 135133, (Haryana).</p>
-                <a href="#" class="card-link">Another link</a>
+                
             </div>
         </div>
     </div>
@@ -160,17 +190,17 @@
                 <h5 class="card-title">Dr. BANSAL JATINDER PAUL </h5>
                 <img  alt="admin" src="{% static 'homepage/c41.jpg' %}" width="200" height="150" class="rounded">
                 <p class="card-text">Om Niwas Khai Basti, Khai Road, Lehragaga-148031, Distt. Sangrur, Punjab.</p>
-                <a href="#" class="card-link">Another link</a>
+                
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card">
             <div class="card-body text-center">
-                <h5 class="card-title">Radhika Swaroop</h5>
+                <h5 class="card-title">DR. RADHIKA SWAROOP</h5>
                 <img  alt="admin" src="{% static 'homepage/s72.jpg' %}" width="200" height="150" class="rounded">
                 <p class="card-text">Swaroop Hospital, 1, Hawa Sarak, Civil Lines, # Jaipur-302 019.</p>
-                <a href="#" class="card-link">Another link</a>
+                
             </div>
         </div>
     </div>
@@ -191,70 +221,34 @@
 
 
 
-<div class="jumbotron text-center" style="margin-bottom:0">
 
-
-
- <!-- Contact Section -->
- <section class="contact-section bg-black">
-        <div class="container">
-    
-          <div class="row">
-    
-            <div class="col-md-4 mb-3 mb-md-0">
-              <div class="card py-4 h-100">
-                <div class="card-body text-center">
-                  <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                  <h4 class="text-uppercase m-0">Address</h4>
-                  <hr class="my-4">
-                  <div class="small text-black-50">cet , bbsr</div>
-                </div>
-              </div>
-            </div>
-    
-            <div class="col-md-4 mb-3 mb-md-0">
-              <div class="card py-4 h-100">
-                <div class="card-body text-center">
-                  <i class="fas fa-envelope text-primary mb-2"></i>
-                  <h4 class="text-uppercase m-0">Email</h4>
-                  <hr class="my-4">
-                  <div class="small text-black-50">
-                    <a href="#">predico.com</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-            <div class="col-md-4 mb-3 mb-md-0">
-              <div class="card py-4 h-100">
-                <div class="card-body text-center">
-                  <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                  <h4 class="text-uppercase m-0">Phone</h4>
-                  <hr class="my-4">
-                  <div class="small text-black-50">+91-9078166555</div>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-          <div class="social d-flex justify-content-center">
-            <a href="#" class="mx-2">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="mx-2">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="mx-2">
-              <i class="fab fa-github"></i>
-            </a>
-          </div>
-    
+    <div id="footer" class="card bg-dark text-white">
+      <div class="card-body">
+        Contact-
+     
+    <ul >
+     
+      <li >
+        <h5 class="mb-1">Email: anujpradhan208@gmail.com</h5>
+      </li>
+      <li >
+        <h5 class="mb-1">Contact no. 9078166555</h5>
+      </li>
+      <li >
+        <h5 class="mb-1">Address: CET, bbsr</h5>
+        <div class="footer-copyright text-center">© 2020 Copyright:
+          <a href="#"> Predico.com</a>
         </div>
-      </section>
+      </li>
+      
+    </ul>
+  </div>
+  </div>
+
+  
+ 
 
 
-  <p>Footer</p>
-</div>
 
 
 

@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path("", views.home, name="home"),
 
+    path('admin_ui', views.admin_ui , name='admin_ui'),
+
     path('patient_ui', views.patient_ui , name='patient_ui'),
     path('checkdisease', views.checkdisease, name="checkdisease"),
     path('pviewprofile/<str:patientusername>', views.pviewprofile , name='pviewprofile'),
@@ -20,7 +22,9 @@ urlpatterns = [
     
     
     path('consultationview/<int:consultation_id>', views.consultationview , name='consultationview'),
+    path('close_consultation/<int:consultation_id>', views.close_consultation , name='close_consultation'),
 
+    
     path('post', views.post, name='post'),
     path('messages', views.messages, name='messages'),
     

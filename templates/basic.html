@@ -99,7 +99,7 @@
                       
       
       
-                      {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
                       
                       {% if user.patient %}
       
@@ -119,6 +119,18 @@
                         </li>
                         <li class="nav-item ml-2">
                             <a class="nav-link" href="{% url 'doctor_ui' %}">Profile</a>
+                            </li>
+      
+      
+                      {% endif %}
+
+                      {% if user.is_superuser  %}
+      
+                      <li class="nav-item ml-2">
+                        <li class="nav-link" href="{% url 'admin_ui' %}" style="color: rgb(91, 252, 50);">Admin: {{user.username}}</li>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <a class="nav-link" href="{% url 'admin_ui' %}">Profile</a>
                             </li>
       
       
@@ -179,7 +191,7 @@
       <div class="container mt-5 mb-5">
    <div class="row">
       <div class="col">
-         <a href="{% url 'admin:index' %}">
+         <a href="{% url 'sign_in_admin' %}">
   <img  alt="admin" src="{% static 'homepage/admin.png' %}"  class="img">
   </a>
       </div>

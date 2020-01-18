@@ -1,0 +1,96 @@
+
+
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+{% block head %}
+
+<style>
+
+    
+    #box{
+
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+</style>
+
+{% endblock %}
+
+
+
+
+{% block body %}
+
+<br>
+
+<div  id="box" class="container mt-5 mb-5">
+    <h2>Admin - {{auser.username}}</h2>
+
+  <div class="col" >
+    <div class="row">
+ 
+    <a id="links" class="btn btn-outline-info btn-block" href="{% url 'admin:index' %}">Manage user's data</a><br>
+    </div>
+    
+    
+              <div class="row">
+                <button class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#myModal2">
+                     View user's feedback
+                </button>
+              </div>
+</div>
+
+
+
+
+
+ <!-- The Modal -->
+ <div class="modal fade" id="myModal2">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Feedback's</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+
+
+            {% for i in Feedback %}
+            
+    <div class="row" style="border-bottom: 1px solid #ccc;">
+       
+       <div class="col">
+        <p class=""><mark>Date created</mark>: {{i.created}}</p>
+       </div> 
+      <div class="col">
+       <p class=""><mark>Feedback</mark>: {{i.feedback}}</p>
+      </div>
+      <div class="col">
+        <p class=""><mark>Sender</mark>: {{i.sender.username}}</p>
+       </div>
+   
+    </div>
+    <br>
+            {% endfor %}
+        
+    </div>
+        
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+{% endblock %}

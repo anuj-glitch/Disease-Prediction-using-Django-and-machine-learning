@@ -18,7 +18,6 @@ class patient(models.Model):
 
     name = models.CharField(max_length = 50)
     dob = models.DateField()
-    img = models.ImageField(upload_to = 'pics', blank=True)
     address = models.CharField(max_length = 100)
     mobile_no = models.CharField(max_length = 15)
     gender = models.CharField(max_length = 10)
@@ -44,7 +43,6 @@ class doctor(models.Model):
 
     name = models.CharField(max_length = 50)
     dob = models.DateField()
-    img = models.ImageField(upload_to = 'pics', blank=True)
     address = models.CharField(max_length = 100)
     mobile_no = models.CharField(max_length = 15)
     gender = models.CharField(max_length = 10)
@@ -79,9 +77,7 @@ class consultation(models.Model):
     patient = models.ForeignKey(patient ,null=True, on_delete=models.SET_NULL)
     doctor = models.ForeignKey(doctor ,null=True, on_delete=models.SET_NULL)
     diseaseinfo = models.OneToOneField(diseaseinfo, null=True, on_delete=models.SET_NULL)
-
     consultation_date = models.DateField()
-    messages = ArrayField(models.CharField(max_length=100),blank=True)
     status = models.CharField(max_length = 20)
 
 

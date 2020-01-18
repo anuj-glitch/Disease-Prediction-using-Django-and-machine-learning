@@ -248,9 +248,13 @@ img{ max-width:100%;}
           <button type="button" class="btn btn-outline-danger mb-4" data-toggle="collapse" data-target="#demo2">Close Consultation</button>
           <div id="demo2" class="collapse">Are you sure to close consultation ?
             <br>
-            <button class="btn btn-outline-success mr-2 mt-2">Yes</button>
-            <button class="btn btn-outline-danger mt-2"  data-toggle="collapse" >NO</button>
-           
+
+            <form action="{% url 'close_consultation' consultation.id %}" method="POST"> 
+              {% csrf_token %}
+            <button type="submit" class="btn btn-outline-success mr-2 mt-2" style="display:inline-block">Yes</button>
+         
+            <div class="btn btn-outline-danger mt-2"  data-toggle="collapse" >NO</div>
+          </form>
           </div>
       
   </div>
