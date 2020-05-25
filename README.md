@@ -12,4 +12,4 @@ make a new environment(recommended) and run...
 - Navigate to http://127.0.0.1:8000/ in your browser
 
 
-### ***Please go to the * Readme.pdf * file for detailed information about the project & screenshots.***
+### ***Please go to the [Readme.pdf](Readme.pdf) file for detailed information about the project & screenshots.***
