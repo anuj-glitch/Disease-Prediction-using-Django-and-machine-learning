@@ -26,7 +26,7 @@ urlpatterns = [
 
     
     path('post', views.post, name='post'),
-    path('messages', views.messages, name='messages'),
+    path('chat_messages', views.chat_messages, name='chat_messages'),
     
 
 
