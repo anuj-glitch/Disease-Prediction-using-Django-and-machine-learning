@@ -429,7 +429,7 @@ img{ max-width:100%;}
 function getMessages(){
   if (!scrolling) {
     $.ajax({
-      url: "{% url 'messages' %}",
+      url: "{% url 'chat_messages' %}",
       type: "GET",
      
       success: function(messages) {
