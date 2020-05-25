@@ -392,9 +392,8 @@ def  make_consultation(request, doctorusername):
 
         consultation_date = date.today()
         status = "active"
-        messages=["messages here"]
         
-        consultation_new = consultation( patient=patient_obj, doctor=doctor_obj, diseaseinfo=diseaseinfo_obj, consultation_date=consultation_date,messages=messages,status=status)
+        consultation_new = consultation( patient=patient_obj, doctor=doctor_obj, diseaseinfo=diseaseinfo_obj, consultation_date=consultation_date,status=status)
         consultation_new.save()
 
         request.session['consultation_id'] = consultation_new.id
