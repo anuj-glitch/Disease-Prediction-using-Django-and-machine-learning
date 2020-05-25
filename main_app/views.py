@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect ,render_to_response
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import JsonResponse
 from datetime import date
@@ -480,7 +480,7 @@ def post(request):
 
 
 
-def messages(request):
+def chat_messages(request):
    if request.method == "GET":
 
          consultation_id = request.session['consultation_id'] 
