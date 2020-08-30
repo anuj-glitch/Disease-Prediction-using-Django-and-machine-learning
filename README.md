@@ -20,4 +20,4 @@ make a new environment(recommended) and run...
 ![](https://github.com/anuj-glitch/Disease-Prediction-using-Django-and-machine-learning/blob/master/screenshots/Capture5.PNG)
 
 
-### ***Please go to the [Readme.pdf](Readme.pdf) file for detailed information about the project & screenshots.***
+### ***Go to the [Readme.pdf](Readme.pdf) file for detailed information about the project & screenshots.***
