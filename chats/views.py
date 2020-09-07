@@ -1,4 +1,4 @@
-from django.shortcuts import render ,render_to_response,redirect
+from django.shortcuts import render , redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Chat , Feedback
 from main_app.views import patient_ui, doctor_ui
