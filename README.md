@@ -1,4 +1,4 @@
-### Disease Prediction based on symptoms provided by patient- A end to end project
+### General Disease Prediction based on symptoms provided by patient- powered by Django & Machine Learning
 
 
 # How To Use This
