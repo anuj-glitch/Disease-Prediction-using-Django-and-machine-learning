@@ -6,6 +6,7 @@ First make sure PostgreSQL and pgadmin is install in your system.
 make a new environment(recommended) and run...
 
 - Run pip install -r requirements.txt to install dependencies
+- Install PosgreSQL and create a DATABASE named *predica*
 - Run python manage.py makemigrations
 - Run python manage.py migrate
 - Run python manage.py runserver
