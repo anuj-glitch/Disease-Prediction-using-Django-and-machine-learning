@@ -2,7 +2,8 @@
 
 
 # How To Use This
-First make sure PostgreSQL and pgadmin is install in your system.
+First make sure PostgreSQL and pgadmin is install in your system. 
+then you have to manually create a DB instance on PostgreSQL named "predico", better use PgAdmin for that.
 make a new environment(recommended) and run...
 
 - Run pip install -r requirements.txt to install dependencies
